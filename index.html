@@ -20,8 +20,52 @@
         $(document).ready(function(){
             $('#output').hide();
             $('#start').click(startGame);
+            $('#checkLock').click(openLock);
+            var ourSecretNum;
+            
+            function openLock(){
+                var win = 0;
+                for(x=0;x<$('input[type="number"]').length;x++){
+                    var guessNumber = $('input[type="number"]').eq(x);
+                    var result=checkNumber(guessNumber.val(),ourSecretNum[x]);
+                    
+                    guessNumber.css({
+                        backgroundColor:result.backgrd
+                    })
+                    if(result.checkr) {
+                        win++;
+                        console.log(win)
+                    }
+                }
+                
+                if(win == 3){
+                    $('#start').show();
+                    $('small').html('You got it<br>' + ourSecretNum);
+                }
+            }
+            
+            function checkNumber(a,b) {
+                var response = {};
+                if(a>b) {
+                    response.checkr = false;
+                    response.backgrd = 'red';
+                }
+                
+                if(a<b){
+                   response.checkr = false;
+                   response.backgrd = 'blue'; 
+                }
+                
+                if(a==b){
+                   response.checkr = true;
+                   response.backgrd = 'green'; 
+                }
+                return response;
+            }
             
             function startGame(){
+                ourSecretNum = Math.floor(Math.random()*(999-100+1)+100).toString();
+                console.log(ourSecretNum);
                 $('#start').hide();
                 $('#output').show();
                 for(x=0;x<$('input[type="number"]').length;x++) {
