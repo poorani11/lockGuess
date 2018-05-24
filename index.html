@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Lock Game</title>
+</head>
+
+<body>
+   <h1>JQuery lock game</h1>
+   <div id="start" class="btn">Start</div>
+   <div id="output"><small>Message</small>
+       <input type="number" name="lock1" min="0" max="9">
+       <input type="number" name="lock2" min="0" max="9">
+       <input type="number" name="lock3" min="0" max="9">
+       <div class="btn" id="checkLock">Open Lock &#128274</div>
+   </div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#output').hide();
+            $('#start').click(startGame);
+            
+            function startGame(){
+                $('#start').hide();
+                $('#output').show();
+                for(x=0;x<$('input[type="number"]').length;x++) {
+                    $('input[type="number"]').eq(x).val('5');
+                }
+                $('small').html('Red Background guess is low and Blue background guess is high');
+            }
+            $('input[type="number"]').css({
+                color:'white',
+                fontSize:'3em',
+                width:'60px',
+                border:'1px solid black',
+                backgroundColor:'black'
+            })
+            $('.btn').css({
+                backgroundColor:'black',
+                color:'white',
+                width:'160px',
+                fontSize:'1.5em',
+                padding:'15px',
+                margin:'25px auto 0px',
+                border:'1px solid black',
+                textAlign:'center'
+            })
+            $('#output').css({
+                backgroundColor:'#333',
+                width:'300px',
+                padding:'15px',
+                border:'1px solid black',
+                textAlign:'center'
+            })
+            $('small').css({
+                color:'white',
+                fontSize:'1em',
+                padding:'15px',
+                marginBottom:'15px',
+                display:'block'
+            })
+        })
+    </script>
+</body>
+</html>
